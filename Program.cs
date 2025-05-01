@@ -53,10 +53,11 @@ public class Program
         Console.WriteLine(string.Empty);
         Console.WriteLine(string.Empty);
 
-        turingMachine.PrintState();
-
         if (mode.Equals("1"))
         {
+            turingMachine.PrintState();
+            Thread.Sleep(1000);
+
             while (!turingMachine.HasStopped)
             {
                 turingMachine.Step(true);

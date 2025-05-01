@@ -94,7 +94,7 @@ public class TuringMachine
 
 		if (printIsAccepted)
 		{
-			Console.WriteLine("IsAccepted: " + _currentState.Equals("q2"));
+			Console.WriteLine("IsAccepted:\t\t" + _currentState.Equals("q2"));
 		}
 
 		Console.WriteLine(string.Empty);
