@@ -1,5 +1,8 @@
 ﻿
 
+using System.Numerics;
+using System.Text.RegularExpressions;
+
 public class Program
 {
     public record TuringMachineDefinition(string Input, Transition[] Transitions);
@@ -10,6 +13,13 @@ public class Program
         Console.WriteLine("This is a simple Turing machine emulator.");
         Console.WriteLine("Please enter the input string (e.g., '010010001010011000101010010110001001001010011000100010001010'): ");
         string input = Console.ReadLine() ?? string.Empty;
+
+        // If the input is a decimal number, parse it into a binary string
+        if (!Regex.IsMatch(input, "^[01]+$") && BigInteger.TryParse(input, out BigInteger result))
+        {
+            input = ToBinaryString(result).Substring(1);
+        }
+
         TuringMachineDefinition transitions = TMParser.Parse(input);
         TuringMachine turingMachine = new TuringMachine(transitions);
 
@@ -38,5 +48,19 @@ public class Program
         {
             turingMachine.FastMode();
         }
+    }
+
+    private static string ToBinaryString(BigInteger number)
+    {
+        if (number == 0)
+            return "0";
+
+        string result = "";
+        while (number > 0)
+        {
+            result = (number % 2) + result;
+            number /= 2;
+        }
+        return result;
     }
 }
