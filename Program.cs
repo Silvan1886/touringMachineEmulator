@@ -5,23 +5,35 @@ using System.Text.RegularExpressions;
 
 public class Program
 {
-    public record TuringMachineDefinition(string Input, Transition[] Transitions);
-    public record Transition(string State, char ReadSymbol, string NextState, char WriteSymbol, bool Direction);
+	public record TuringMachineDefinition(string Input, Transition[] Transitions);
+	public record Transition(string State, char ReadSymbol, string NextState, char WriteSymbol, bool Direction);
 
-    public static void Main(string[] args)
-    {
-        Console.WriteLine("This is a simple Turing machine emulator.");
-        Console.WriteLine("Please enter the input string (e.g., '010010001010011000101010010110001001001010011000100010001010'): ");
-        string input = Console.ReadLine() ?? string.Empty;
+	public static void Main(string[] args)
+	{
+		string input;
+		if (args.Length > 0)
+		{
+			if (!File.Exists(args[0]))
+			{
+				Console.WriteLine($"File {args[0]} does not exist.");
+				return;
+			}
+			input = File.ReadAllText(args[0]);
+		}
+		else
+		{
+			Console.WriteLine("This is a simple Turing machine emulator.");
+			Console.WriteLine("Please enter the input string (e.g., '010010001010011000101010010110001001001010011000100010001010'): ");
+			input = Console.ReadLine() ?? string.Empty;
 
-        // If the input is a decimal number, parse it into a binary string
-        if (!Regex.IsMatch(input, "^[01]+$") && BigInteger.TryParse(input, out BigInteger result))
-        {
-            input = ToBinaryString(result).Substring(1);
+            // If the input is a decimal number, parse it into a binary string
+            if (!Regex.IsMatch(input, "^[01]+$") && BigInteger.TryParse(input, out BigInteger result))
+            {
+                input = ToBinaryString(result).Substring(1);
+            }
         }
-
-        TuringMachineDefinition transitions = TMParser.Parse(input);
-        TuringMachine turingMachine = new TuringMachine(transitions);
+		TuringMachineDefinition transitions = TMParser.Parse(input);
+		TuringMachine turingMachine = new TuringMachine(transitions);
 
         string mode = string.Empty;
 

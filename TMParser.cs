@@ -7,7 +7,11 @@ public class TMParser
 	{
 		var transitions = new List<Transition>();
 		var inputPosition = input.IndexOf("111");
-		string inputString = input.Substring(inputPosition + 3).Trim();
+		string inputString = string.Empty;
+		if (inputPosition != -1)
+		{
+			inputString = input.Substring(inputPosition + 3).Trim();
+		}
 
 		var transitionStrings = input.Substring(0, inputPosition).Split("11", StringSplitOptions.RemoveEmptyEntries);
 		foreach (var transitionString in transitionStrings)
