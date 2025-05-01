@@ -6,19 +6,10 @@ public class TMParser
 	public static TuringMachineDefinition Parse(string input)
 	{
 		var transitions = new List<Transition>();
-		var lines = input.Split("111");
-		string inputString = string.Empty;
+		var inputPosition = input.IndexOf("111");
+		string inputString = input.Substring(inputPosition + 3).Trim();
 
-		if (lines.Length > 1)
-		{
-			inputString = lines[1].Trim();
-		}
-		else if (lines.Length > 2)
-		{
-			throw new ArgumentException("Invalid input format. Expected at most two parts when seperating with '111'.");
-		}
-
-		var transitionStrings = lines[0].Split("11", StringSplitOptions.RemoveEmptyEntries);
+		var transitionStrings = input.Substring(0, inputPosition).Split("11", StringSplitOptions.RemoveEmptyEntries);
 		foreach (var transitionString in transitionStrings)
 		{
 			var parts = transitionString.Split("1", StringSplitOptions.RemoveEmptyEntries);

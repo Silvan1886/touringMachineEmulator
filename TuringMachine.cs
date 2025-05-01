@@ -50,12 +50,12 @@ public class TuringMachine
             HasStopped = true;
         }
 
+        _stepCount++;
+
         if (shouldPrint)
         {
             PrintState();
         }
-
-        _stepCount++;
     }
 
     public void FastMode()
