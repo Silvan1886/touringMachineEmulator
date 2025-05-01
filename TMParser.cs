@@ -28,12 +28,14 @@ public class TMParser
 				var readSymbol = GetSymbol(parts[1].Trim());
 				var nextState = "q" + parts[2].Trim().Length;
 				var writeSymbol = GetSymbol(parts[3].Trim());
-				var direction = parts[4].Trim() == "1";
+				var direction = parts[4].Trim() == "00";
 				transitions.Add(new Transition(state, readSymbol, nextState, writeSymbol, direction));
 			}
 		}
 
-		return new TouringMachineDefinition(inputString, transitions.ToArray());
+		TouringMachineDefinition tmDef = new TouringMachineDefinition(inputString, transitions.ToArray());
+		Console.WriteLine(GetStringRepresentation(tmDef));
+		return tmDef;
 	}
 
 	private static char GetSymbol(string symbolString)
