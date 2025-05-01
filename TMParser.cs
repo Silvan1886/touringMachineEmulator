@@ -3,7 +3,7 @@ using static Program;
 
 public class TMParser
 {
-	public static TouringMachineDefinition Parse(string input)
+	public static TuringMachineDefinition Parse(string input)
 	{
 		var transitions = new List<Transition>();
 		var lines = input.Split("111");
@@ -33,7 +33,7 @@ public class TMParser
 			}
 		}
 
-		TouringMachineDefinition tmDef = new TouringMachineDefinition(inputString, transitions.ToArray());
+		TuringMachineDefinition tmDef = new TuringMachineDefinition(inputString, transitions.ToArray());
 		Console.WriteLine(GetStringRepresentation(tmDef));
 		return tmDef;
 	}
@@ -53,7 +53,7 @@ public class TMParser
 		}
 	}
 
-	public static string GetStringRepresentation(TouringMachineDefinition tmDef)
+	public static string GetStringRepresentation(TuringMachineDefinition tmDef)
 	{
 		var sb = new StringBuilder();
 		sb.AppendLine("Parsed Turing Machine Definition:");

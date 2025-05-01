@@ -10,9 +10,15 @@ public class TuringMachine
     private int _stepCount = 0;
     public bool HasStopped { get; private set; }
 
-    public TuringMachine(Transition[] transitions)
+    public TuringMachine(TuringMachineDefinition definition)
     {
-        _transitions = transitions;
+        _transitions = definition.Transitions;
+
+        if (definition.Input.Any())
+        {
+            _bandRight.Clear();
+            _bandRight.AddRange(definition.Input);
+        }
     }
 
     public void Step(bool shouldPrint)
@@ -52,7 +58,7 @@ public class TuringMachine
         _stepCount++;
     }
 
-    public void LaufModus()
+    public void FastMode()
     {
         while (!HasStopped)
         {
@@ -64,11 +70,6 @@ public class TuringMachine
 
     private void PrintState(bool printIsAccepted = false)
     {
-        if (printIsAccepted)
-        {
-            Console.WriteLine("IsAccepted: " + _currentState.Equals("q2"));
-        }
-
         List<char> left = new(_bandLeft);
         List<char> right = new(_bandRight);
 
@@ -83,11 +84,20 @@ public class TuringMachine
 
         left.Reverse();
 
-        Console.WriteLine("== STATE ==");
-        Console.WriteLine("Current state:\t" + _currentState);
-        Console.WriteLine("Band:\t" + string.Join("", left.Concat(right)));
+        Console.WriteLine("===== STATE =====");
+        Console.WriteLine(string.Empty);
+        Console.WriteLine("Current state:\t\t" + _currentState);
+        Console.WriteLine("Band:\t\t\t" + string.Join("", left.Concat(right)));
         Console.WriteLine("Current Position:\t" + _currentPosition);
-        Console.WriteLine("Step count:\t" + _stepCount);
+        Console.WriteLine("Step count:\t\t" + _stepCount);
+
+        if (printIsAccepted)
+        {
+            Console.WriteLine("IsAccepted: " + _currentState.Equals("q2"));
+        }
+
+        Console.WriteLine(string.Empty);
+        Console.WriteLine(string.Empty);
     }
 
     private char GetCharAtCurrentPosition()
