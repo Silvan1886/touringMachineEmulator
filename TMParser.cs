@@ -8,12 +8,13 @@ public class TMParser
 		var transitions = new List<Transition>();
 		var inputPosition = input.IndexOf("111");
 		string inputString = string.Empty;
+		string[] transitionStrings = input.Split("11", StringSplitOptions.RemoveEmptyEntries);
 		if (inputPosition != -1)
 		{
 			inputString = input.Substring(inputPosition + 3).Trim();
+			transitionStrings = input.Substring(0, inputPosition).Split("11", StringSplitOptions.RemoveEmptyEntries);
 		}
 
-		var transitionStrings = input.Substring(0, inputPosition).Split("11", StringSplitOptions.RemoveEmptyEntries);
 		foreach (var transitionString in transitionStrings)
 		{
 			var parts = transitionString.Split("1", StringSplitOptions.RemoveEmptyEntries);
@@ -45,11 +46,11 @@ public class TMParser
 				return Char.MinValue; // Blank symbol
 			case 4:
 				return 'X';
-            case 5:
-                return 'Y';
-            case 6:
-                return 'Z';
-            default:
+			case 5:
+				return 'Y';
+			case 6:
+				return 'Z';
+			default:
 				return (char)symbolString.Length;
 		}
 	}
