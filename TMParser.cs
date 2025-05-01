@@ -43,7 +43,13 @@ public class TMParser
 				return '1';
 			case 3:
 				return Char.MinValue; // Blank symbol
-			default:
+			case 4:
+				return 'X';
+            case 5:
+                return 'Y';
+            case 6:
+                return 'Z';
+            default:
 				return (char)symbolString.Length;
 		}
 	}
