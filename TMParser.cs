@@ -47,7 +47,7 @@ public class TMParser
 			case 2:
 				return '1';
 			case 3:
-				return 'b'; // Blank symbol
+				return Char.MinValue; // Blank symbol
 			default:
 				return (char)symbolString.Length;
 		}
