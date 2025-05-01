@@ -45,8 +45,15 @@ public class Program
             mode = Console.ReadLine() ?? string.Empty;
         }
 
+        Console.WriteLine(string.Empty);
+        Console.WriteLine(string.Empty);
+        Console.WriteLine(string.Empty);
         Console.WriteLine("'@' is at the left of the current position");
         Console.WriteLine(string.Empty);
+        Console.WriteLine(string.Empty);
+        Console.WriteLine(string.Empty);
+
+        turingMachine.PrintState();
 
         if (mode.Equals("1"))
         {

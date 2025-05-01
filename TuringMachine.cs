@@ -69,7 +69,7 @@ public class TuringMachine
 		PrintState(true);
 	}
 
-	private void PrintState(bool printIsAccepted = false)
+	public void PrintState(bool printIsAccepted = false)
 	{
 		List<char> left = new(_bandLeft);
 		List<char> right = new(_bandRight);
