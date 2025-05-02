@@ -43,7 +43,7 @@ public class TMParser
 			case 2:
 				return '1';
 			case 3:
-				return Char.MinValue; // Blank symbol
+				return TuringMachine.EMPTY_SYMBOL; // Blank symbol
 			case 4:
 				return 'X';
 			case 5:

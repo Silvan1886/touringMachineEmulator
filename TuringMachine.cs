@@ -2,9 +2,10 @@ using static Program;
 
 public class TuringMachine
 {
+	public const char EMPTY_SYMBOL = '_';
 	private readonly Transition[] _transitions;
-	private readonly List<char> _bandLeft = new List<char>() { Char.MinValue };
-	private readonly List<char> _bandRight = new List<char>() { Char.MinValue };
+	private readonly List<char> _bandLeft = new List<char>() { TuringMachine.EMPTY_SYMBOL };
+	private readonly List<char> _bandRight = new List<char>() { TuringMachine.EMPTY_SYMBOL };
 	private string _currentState = "q1";
 	private int _currentPosition = 0;
 	private int _stepCount = 0;
@@ -38,11 +39,11 @@ public class TuringMachine
 
 			if (transition.Direction && _bandRight.Count - 1 < _currentPosition)
 			{
-				_bandRight.Add(Char.MinValue);
+				_bandRight.Add(TuringMachine.EMPTY_SYMBOL);
 			}
 			else if (!transition.Direction && _bandLeft.Count - 1 < Math.Abs(_currentPosition))
 			{
-				_bandLeft.Add(Char.MinValue);
+				_bandLeft.Add(TuringMachine.EMPTY_SYMBOL);
 			}
 		}
 		else
